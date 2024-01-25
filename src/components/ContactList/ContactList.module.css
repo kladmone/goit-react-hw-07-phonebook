@@ -1,0 +1,15 @@
+.delBtn {
+  background-color: white;
+  border-radius: 10px;
+  margin-left: 5px;
+}
+.delBtn:hover {
+  background-color: red;
+  color: white;
+}
+.contactsList {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

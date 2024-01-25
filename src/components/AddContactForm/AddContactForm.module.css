@@ -1,0 +1,18 @@
+.form {
+  max-width: 250px;
+  padding: 25px;
+  border: 1px solid rgb(0, 0, 0);
+}
+.formLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.phonebookContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
