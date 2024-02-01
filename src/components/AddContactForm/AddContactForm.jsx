@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
 import { nanoid } from 'nanoid';
 import { addContact } from '../../redux/contacts/contactsSlicer';
 import css from './AddContactForm.module.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectContacts } from '../../redux/selectors';
 
-export const AddContactForm = ({ contacts }) => {
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+export const AddContactForm = () => {
   const dispatch = useDispatch();
+  const contacts = useSelector(selectContacts);
 
   const handleAddContact = formData => {
     const hasDuplicates = contacts.some(
@@ -20,19 +19,21 @@ export const AddContactForm = ({ contacts }) => {
 
     const finalContact = { ...formData, id: nanoid() };
 
-    const action = addContact(finalContact);
-    dispatch(action);
+    dispatch(addContact(finalContact));
   };
 
   const handleFormSubmit = event => {
     event.preventDefault();
+
+    const name = event.currentTarget.name.value;
+    const number = event.currentTarget.number.value;
+
     const formData = {
       name,
       number,
     };
     handleAddContact(formData);
-    setName('');
-    setNumber('');
+    event.currentTarget.reset();
   };
 
   return (
@@ -41,23 +42,11 @@ export const AddContactForm = ({ contacts }) => {
       <form className={css.form} onSubmit={handleFormSubmit}>
         <label className={css.formLabel}>
           <span>Name</span>
-          <input
-            type="text"
-            name="name"
-            required
-            value={name}
-            onChange={e => setName(e.target.value)}
-          />
+          <input type="text" name="name" required />
         </label>
         <label className={css.formLabel}>
           <span>Number</span>
-          <input
-            type="tel"
-            name="number"
-            required
-            value={number}
-            onChange={e => setNumber(e.target.value)}
-          />
+          <input type="tel" name="number" required />
         </label>
         <button type="submit">Add contact</button>
       </form>
