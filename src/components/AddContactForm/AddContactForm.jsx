@@ -1,4 +1,3 @@
-import { nanoid } from 'nanoid';
 import { addContact } from '../../redux/contacts/contactsSlicer';
 import css from './AddContactForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,7 +16,7 @@ export const AddContactForm = () => {
       return;
     }
 
-    const finalContact = { ...formData, id: nanoid() };
+    const finalContact = { ...formData };
 
     dispatch(addContact(finalContact));
   };

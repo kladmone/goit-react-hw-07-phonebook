@@ -64,28 +64,28 @@ export const contactsSlicer = createSlice({
   },
   extraReducers: builder => {
     builder
-      .addCase(fetchContacts.pending, statusPending)
-      .addCase(fetchContacts.fulfilled, (state, action) => {
+      .addCase(apiGetContacts.pending, statusPending)
+      .addCase(apiGetContacts.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.items = action.payload;
+        state.contacts.items = action.payload;
       })
-      .addCase(addNewContact.pending, statusPending)
-      .addCase(addNewContact.rejected, statusRejected)
-      .addCase(addNewContact.fulfilled, (state, action) => {
+      .addCase(addContact.pending, statusPending)
+      .addCase(addContact.rejected, statusRejected)
+      .addCase(addContact.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.items.push(action.payload);
+        state.contacts.items.push(action.payload);
       })
-      .addCase(deleteContacts.pending, statusPending)
-      .addCase(deleteContacts.rejected, statusRejected)
-      .addCase(deleteContacts.fulfilled, (state, action) => {
+      .addCase(deleteContact.pending, statusPending)
+      .addCase(deleteContact.rejected, statusRejected)
+      .addCase(deleteContact.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        const index = state.items.findIndex(
+        const index = state.contacts.items.findIndex(
           contact => contact.id === action.payload.id
         );
-        state.items.splice(index, 1);
+        state.contacts.items.splice(index, 1);
       });
   },
 });
